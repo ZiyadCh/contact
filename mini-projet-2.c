@@ -40,7 +40,7 @@ void search(struct contact persone[], int count){
     int exist = 0;
     printf("Nom du contact:\n");
     scanf("%s", n);
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i <= count; i++)
     {
         if (strcmp(n, persone[i].nom) == 0)
         {
@@ -55,29 +55,64 @@ void search(struct contact persone[], int count){
         printf("Ce contact n'exist pas\n");
     }
 }
-
+//MOIFIER*************************************
 void modifier(struct contact persone[], int count){
     char n[10],n2[10],m2[10];
     int exist = 0,num;
 
     printf("Nom du contact pour modifier:\n");
     scanf("%s", n);
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i <= count; i++)
     {
         if (strcmp(n, persone[i].nom) == 0)
         {
             printf("Nom    : %s\n", persone[i].nom);
             printf("numero : 0%d\n", persone[i].num);
             printf("Email  : %s\n", persone[i].email);
-        printf("+============================================+\n");
-            printf("Entrer les nouvelle informtions:");
+            printf("+============================================+\n");
+            printf("Entrer les nouvelle informtions:\n");
+            printf("Nom    : ");
+            scanf("%s",n2);
+            printf("numero : \n212+:");
+            scanf("%d",&num);
+            printf("Email  : ");
+            scanf("%s",m2);
             exist = 1;
+            //replace-------------
+            strcpy(persone[i].nom,n2);
+            strcpy(persone[i].email,m2);
+            persone[i].num = num;
+        }
+     
+  }
+ if (exist == 0)
+    {
+        printf("Ce contact n'exist pas\n");
+    } 
+}
+//SUPPRIMER**********************************************
+void supprimer(struct contact persone[], int count){
+char n[10];
+    int exist = 0;
+    printf("Nom du contact:\n");
+    scanf("%s", n);
+    for (int i = 0; i <= count; i++)
+    {
+        if (strcmp(n, persone[i].nom) == 0)
+        {
+
+          strcpy(persone[i].nom,persone[i +1].nom);
+          strcpy(persone[i].email,persone[i +1].email);
+          persone[i].num = persone[i+1].num;
+          printf("Contact Supprime avec Succes\n");
+
+          exist = 1;
         }
     }
     if (exist == 0)
     {
         printf("Ce contact n'exist pas\n");
-    }   
+    }
 }
 
 int main()
@@ -112,9 +147,14 @@ int main()
             modifier(personne,count);
             break;
         case 4: // SUPPRIMER =-=======================
+            supprimer(personne,count);
+            count--;
             break;
         case 5: // RECHERCHER=========================
             search(personne, count);
+            break;
+        case 6:
+            printf("Au Revoir.");
             break;
         default:
             printf("Choisi un nombre entre 1-5!");
