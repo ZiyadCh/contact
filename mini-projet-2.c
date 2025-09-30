@@ -8,6 +8,27 @@ struct contact
     char email[10];
 };
 
+void trier (struct contact p[],int count){
+    struct contact tmp;
+
+    for (int i = 0; i < count; i++)
+    {
+        for (int j = 0; j < count; j++)
+        {
+            if (strcmp(p[i].nom,p[i +1].nom) > 0)
+            {
+                tmp = p[i];
+                p[i] = p[i+1];
+                p[i+1] = tmp;
+            }
+            
+        }
+        
+    }
+    
+
+}
+
 struct contact ajouter(){
     struct contact p;
     printf("--------------------------------\n");
@@ -27,10 +48,10 @@ void afficher(struct contact persone[], int count)
 {
     for (int i = 1; i <= count; i++)
     {
-        printf("---------------------------\n");
         printf("numero : 0%d\n", persone[i].num);
         printf("Nom    : %s\n", persone[i].nom);
         printf("Email  : %s\n", persone[i].email);
+        printf("---------------------------\n");
     }
 };
 
@@ -132,6 +153,7 @@ int main()
         printf("|4-Supprimer un contact.                     |\n");
         printf("|5-Rechercher un contact.                    |\n");
         printf("|6-Quitter                                   |\n");
+        printf("|7-trier par nom                             |\n");
         printf("+============================================+\n");
         scanf("%d", &option);
         switch (option)
@@ -155,6 +177,9 @@ int main()
             break;
         case 6:
             printf("Au Revoir.");
+            break;
+            case 7:
+            trier(personne,count);
             break;
         default:
             printf("Choisi un nombre entre 1-5!");
